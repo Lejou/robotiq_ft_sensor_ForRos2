@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+
+	<node name="rq_sensor" pkg="robotiq_ft_sensor" type="rq_sensor" >
+		<param name="~serial_id" value="ttyUSB0" />
+	</node>
+
+</launch>

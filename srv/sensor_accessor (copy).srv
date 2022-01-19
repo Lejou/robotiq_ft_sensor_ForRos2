@@ -1,0 +1,50 @@
+uint8 COMMAND_GET_SERIAL_NUMBER=1
+uint8 COMMAND_GET_FIRMWARE_VERSION=2
+uint8 COMMAND_GET_PRODUCTION_YEAR=4
+uint8 COMMAND_SET_ZERO=8
+uint8 command_id
+string command  # deprecated, please use command_id with a value of COMMAND_*
+---
+bool success
+string res
+
+
+
+uint8 command_get_serial_number
+uint8 command_get_firmware_version
+uint8 command_get_production_year
+uint8 command_set_zero
+
+
+
+add_executable(rq_sensor nodes/rq_sensor.cpp src/rq_sensor_com.cpp src/rq_sensor_state.cpp)
+ament_target_dependencies(rq_sensor
+  rclcpp
+  std_msgs
+  std_srvs)
+  
+#add_executable(rq_test_sensor nodes/rq_test_sensor.cpp)
+#ament_target_dependencies(rq_test_sensor
+#  rclcpp
+#  std_msgs
+#  std_srvs)
+
+
+install(TARGETS rq_sensor rq_test_sensor
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(DIRECTORY urdf/
+  DESTINATION urdf
+)
+
+install(DIRECTORY meshes/
+  DESTINATION meshes
+)
+
+
+
+ament_export_include_directories(include)
+ament_export_dependencies(std_msgs)
+ament_export_dependencies(std_srvs)
+ament_package()
